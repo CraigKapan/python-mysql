@@ -9,6 +9,11 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 
-sql = "DROP TABLE IF EXISTS customers"
+sql = "UPDATE customers SET address = %s WHERE address = %s"
+val = ("Valley 345", "Canyon 123")
 
-mycursor.execute(sql)
+mycursor.execute(sql, val)
+
+mydb.commit()
+
+print(mycursor.rowcount, "record(s) affected")
